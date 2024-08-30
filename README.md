@@ -23,10 +23,6 @@ Lizenz
 
 Dieses Script ist unter der MIT-Lizenz veröffentlicht. Siehe LICENSE.txt für Details.
 
-Kontakt
-
-Für Fragen oder Anregungen stehe ich gerne zur Verfügung. Bitte kontaktiere mich unter mario.herrmann@example.com.
-
 Changelog
 
 1.0.0: Erstes Release
