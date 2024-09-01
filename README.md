@@ -2,11 +2,11 @@
 
 Beschreibung
 
-Dieses Script erstellt eine.ics-Datei aus einem aus ATOSS exportierten Mitarbeiterdienstplan. Die .ics-Datei kann dann in einem Kalender-Programm wie Google Kalender oder Apple Kalender importiert werden.
+Dieses Script erstellt eine.ics-Datei aus einem aus ATOSS Staff Efficiency Suite exportierten Mitarbeiterdienstplan. Die .ics-Datei kann dann in einem Kalender-Programm wie Google Kalender oder Apple Kalender importiert werden.
 
 Funktionalität
 
-Liest den Mitarbeiterdienstplan aus einem Excel-Worksheet, erstellt eine.ics-Datei mit den Terminen und Abwesenheiten, setzt die Terminnamen, -daten und -zeiten korrekt, behandelt Abwesenheiten als ganztägige Termine.
+Liest die zur Terminerstellung relevanten Daten aus dem Excel-Worksheet und erstellt eine.ics-Datei mit den Arbeitszeiten und Abwesenheiten.
 
 Anforderungen
 
@@ -20,5 +20,5 @@ Dieses Script ist unter der MIT-Lizenz veröffentlicht. Siehe LICENSE.txt für D
 
 Changelog
 
-1.0.0: Erstes Release <BR>
-1.1.0: Behandlung von Abwesenheiten als ganztägige Termine hinzugefügt
+1.0.0: Erstes Release <br>
+1.1.0: Behandlung von Abwesenheiten als ganztägige Termine hinzugefügt <br>
