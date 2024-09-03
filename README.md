@@ -22,3 +22,4 @@ Changelog
 
 1.0.0: Erstes Release <br>
 1.1.0: Behandlung von Abwesenheiten als ganztägige Termine hinzugefügt <br>
+1.2.0: Dateiname beinhaltet Mitarbeitername und Monat

@@ -26,10 +26,8 @@ Sub ExportToIcs()
     Set ws = ThisWorkbook.Worksheets("emsche")
     
    'Letzte Zeile ermitteln
+    firstRow = 9
     lastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
-    
-    '.ics-Datei erstellen
-    icsFile = "~/PEP.ics"
     
    'Header für.ics-Datei erstellen
     icsText = icsText & "BEGIN:VCALENDAR" & vbCrLf
@@ -82,6 +80,15 @@ Sub ExportToIcs()
     
    'Footer für.ics-Datei erstellen
     icsText = icsText & "END:VCALENDAR"
+
+    if Format(firstRow, "MMMM")  <> Format(lastRow, "MMMM") Then
+        Monat = firstRow & "/" & lastRow
+        Else
+        Monat = firstRow
+    End If
+            
+	'.ics-Datei erstellen
+    icsFile = "~/PEP_" & Split(ws.Cells(3, "C").Value, ",")(0) & "_" & Format(ws.Cells(9, "A").Value, "MMMM") '& ".ics"
     
     '.ics-Datei speichern
     Open icsFile For Output As #1
@@ -91,4 +98,3 @@ Sub ExportToIcs()
     MsgBox "Die.ics-Datei wurde erfolgreich erstellt!"
     
 End Sub
-
