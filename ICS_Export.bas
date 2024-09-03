@@ -79,8 +79,8 @@ Sub ExportToIcs()
     
    'Footer für.ics-Datei erstellen
     icsText = icsText & "END:VCALENDAR"
-
-	'.ics-Datei erstellen
+    
+    '.ics-Datei erstellen
     icsFile = "~/PEP_" & Split(ws.Cells(3, "C").Value, ",")(0) & "_" & Format(ws.Cells(9, "A").Value, "MMMM") '& ".ics"
     
     '.ics-Datei speichern
