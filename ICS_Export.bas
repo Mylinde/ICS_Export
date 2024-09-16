@@ -2,7 +2,7 @@
 Option VBASupport 1
 '-------------------------------------------------------------------------------
 ' Module Name: ICS_Export
-' Description: Erstellt eine .ics aus einem aus ATOSS exportierten Mitarbeiterdienstplan
+' Description: Creates an .ics from an employee schedule exported from ATOSS
 ' Licensing: This code is released under the MIT License. For more information, see <https://opensource.org/licenses/MIT>.
 ' Copyright (c) 2024 Mario Herrmann. All rights reserved.
 '-------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ Sub ExportToIcs()
     icsText = icsText & "END:VCALENDAR"
     
     '.ics-Datei erstellen
-    icsFile = "~/PEP_" & Split(ws.Cells(3, "C").Value, ",")(0) & "_" & Format(ws.Cells(9, "A").Value, "MMMM") '& ".ics"
+    icsFile = "$HOME/PEP_" & Split(ws.Cells(3, "C").Value, ",")(0) & "_" & Format(ws.Cells(9, "A").Value, "MMMM") '& ".ics"
     
     '.ics-Datei speichern
     Open icsFile For Output As #1
