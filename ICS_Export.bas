@@ -1,5 +1,3 @@
-﻿Rem Attribute VBA_ModuleType=VBAModule
-Option VBASupport 1
 '-------------------------------------------------------------------------------
 ' Module Name: ICS_Export
 ' Description: Creates an .ics from an employee schedule exported from ATOSS
