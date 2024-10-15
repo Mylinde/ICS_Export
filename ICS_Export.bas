@@ -79,7 +79,7 @@ Sub ExportToIcs()
     icsText = icsText & "END:VCALENDAR"
     
     '.ics-Datei erstellen
-    icsFile = "$HOME/PEP_" & Split(ws.Cells(3, "C").Value, ",")(0) & "_" & Format(ws.Cells(9, "A").Value, "MMMM") '& ".ics"
+    icsFile = "$HOME/PEP_" & Split(ws.Cells(3, "C").Value, ",")(0) & "_" & Format(ws.Cells(9, "A").Value, "MMMM") & ".ics"
     
     '.ics-Datei speichern
     Open icsFile For Output As #1
