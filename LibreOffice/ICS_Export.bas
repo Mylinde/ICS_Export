@@ -1,3 +1,4 @@
+﻿option VBASupport 1
 '-------------------------------------------------------------------------------
 ' Module Name: ICS_Export
 ' Description: Creates an .ics from an employee schedule exported from ATOSS
@@ -10,6 +11,7 @@ Sub ExportToIcs()
    'Definition der Variablen
     Dim ws As Object
     Dim lastRow As Long
+    Dim oCell As Object
     Dim i As Long
     Dim icsText As String
     Dim TerminName As String
@@ -20,41 +22,47 @@ Sub ExportToIcs()
     Dim icsFile As String
     
    'Arbeitsblatt setzen
-    Set ws = ThisWorkbook.Worksheets("emsche")
+    ws = ThisComponent.getSheets().getByIndex(0)
     
-   'Letzte Zeile ermitteln
-    lastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
-    
+   'Letzte Zeile ermitteln     
+    For i = ws.Rows.getCount() - 1 To 0 Step -1
+        oCell = ws.getCellByPosition(0, i)
+        If Len(Trim(oCell.getString())) > 0 Then
+            lastRow = i + 1   ' Rückgabe im 1‑basierten Excel‑Stil
+            Exit For
+        End If
+    Next i
+   
    'Header für.ics-Datei erstellen
     icsText = icsText & "BEGIN:VCALENDAR" & vbCrLf
     icsText = icsText & "VERSION:2.0" & vbCrLf
     icsText = icsText & "CALSCALE:GREGORIAN" & vbCrLf
     
    'Daten durchlaufen
-    For i = 9 To lastRow
+    For i = 8 To lastRow
     
        'Termin-Name
-        TerminName = ws.Cells(3, "C").Value
-        TerminName = Split(TerminName, " ")(1) & " arbeiten"
+        TerminName = ws.getCellByPosition(2, 2).String
+        TerminName = Split(TerminName, ",")(1) & " arbeiten"
         
        'Termin-Datum
-        TerminDatum = ws.Cells(i, "A").Value
+        TerminDatum = ws.getCellByPosition(0, i).Value
         TerminDatum = Format(TerminDatum, "yyyymmdd")     
-        EndTerminDatum = ws.Cells(i, "A").Value
+        EndTerminDatum = ws.getCellByPosition(0, i).Value
         EndTerminDatum = Format(EndTerminDatum, "yyyymmdd")
               
        'Termin-Uhrzeit
-        TerminUhrzeit = ws.Cells(i, "H").Value
-        Abwesenheit = ws.Cells(i, "E").Value
+        TerminUhrzeit = ws.getCellByPosition(7, i).String
+        Abwesenheit = ws.getCellByPosition(4, i).String
                 
         If Abwesenheit <> "" Then
     		TerminName = "Abwesenheit: " & Abwesenheit
-    		EndTerminDatum = ws.Cells(i, "A").Value +1
+    		EndTerminDatum = ws.getCellByPosition(0, i).Value +1
     		EndTerminDatum = Format(EndTerminDatum, "yyyymmdd")
-    		TerminUhrzeit = " - "
+    		TerminUhrzeit = "-"
 			StartUhrzeit = Split(TerminUhrzeit, "-")(0)
             EndUhrzeit = Split(TerminUhrzeit, "-")(1)
-        ElseIf InStr(TerminUhrzeit, "-") > 0 Then
+        Elseif TerminUhrzeit <> "" Then
             StartUhrzeit = Split(TerminUhrzeit, "-")(0)
             EndUhrzeit = Split(TerminUhrzeit, "-")(1)
             TerminDatum = TerminDatum & "T"           
@@ -78,7 +86,7 @@ Sub ExportToIcs()
     icsText = icsText & "END:VCALENDAR"
     
     '.ics-Datei erstellen
-    icsFile = "$HOME/PEP/PEP_" & Split(ws.Cells(3, "C").Value, ",")(0) & "_" & Format(ws.Cells(9, "A").Value, "MMMM") & ".ics"
+    icsFile = "~/PEP/PEP_" & Split(ws.getCellByPosition(2, 2).String, ",")(0) & "_" & Format(ws.getCellByPosition(0, 8).Value, "MMMM") & ".ics"
     
     '.ics-Datei speichern
     Open icsFile For Output As #1
