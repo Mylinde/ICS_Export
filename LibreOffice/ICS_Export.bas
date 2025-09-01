@@ -25,10 +25,11 @@ Sub ExportToIcs()
     ws = ThisComponent.getSheets().getByIndex(0)
     
    'Letzte Zeile ermitteln     
-    For i = ws.Rows.getCount() - 1 To 0 Step -1
-        oCell = ws.getCellByPosition(0, i)
-        If Len(Trim(oCell.getString())) > 0 Then
-            lastRow = i + 1   ' Rückgabe im 1‑basierten Excel‑Stil
+    aData = ws.getCellRangeByPosition(0, 0, 0, 40).getDataArray()
+    lastRow = 0
+    For i = UBound(aData) To LBound(aData) Step -1   ' 40 → 0
+        If Len(Trim(CStr(aData(i)(0)))) > 0 Then
+            lastRow = i + 1   ' 1‑basiert
             Exit For
         End If
     Next i
@@ -93,6 +94,6 @@ Sub ExportToIcs()
     Print #1, icsText
     Close #1
     
-    MsgBox "Die.ics-Datei wurde erfolgreich erstellt!"
+    MsgBox "Die .ics-Datei wurde erfolgreich erstellt!"
     
 End Sub

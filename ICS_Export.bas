@@ -85,6 +85,6 @@ Sub ExportToIcs()
     Print #1, icsText
     Close #1
     
-    MsgBox "Die.ics-Datei wurde erfolgreich erstellt!"
+    MsgBox "Die .ics-Datei wurde erfolgreich erstellt!"
     
 End Sub
